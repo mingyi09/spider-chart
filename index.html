@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Enneadecagon</title>
+    <link rel="icon" href="icon/radar_icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js"></script>
@@ -12,13 +13,20 @@
 </head>
 
 <body>
-    <a id='saveImage' download='spider_chart_report.jpg'>Save as Image</a>
+    <a id='saveImage' download="spider chart">
+        <img alt="downloadable icon" src="icon/download_button.png" width="40" height="40">
+    </a>
+    
     <canvas id="chartJSContainer" style="height: 90%; width: 100%;"></canvas>
     <script>
         const anchors = ["Adaptiveness","Absorption/Immersion","Emotional Involvement","Dissociation","Embodiment","Perspective",
         "Complexity/Elaborateness","Flexibility/Transformative Ability", "Vivideness", "Suggestibility","Willingness",
         "Resistance", "Temporal Tendency", "Future", "Past", "Fantasy Orientation", "Novelty", "Possibility", "Practicality"]
         const initialDegree = Array(anchors.length).fill(10)
+        function done(){
+            var url = spiderChart.toBase64Image();
+            saveImage.href = url;
+        }
         var options = {
             type: 'radar',
             data: {
@@ -27,9 +35,16 @@
                     label: 'Scale',
                     data: initialDegree,
                     pointHitRadius: 50,
+                    backgroundColor: 'rgb(238,225,255,0.5)',
+                    borderColor: '#c2aeff',
+                    pointBackgroundColor: '#b892ff',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'black'
                 }]
             },
             options: {
+                animation: {onComplete: done},
                 responsive: false,
                 onHover: function (e) {
                     const point = e.chart.getElementsAtEventForMode(e, 'nearest', { intersect: true }, false)
@@ -53,18 +68,16 @@
                 scales: {
                     r: {
                         max: 10,
-                        min: -0.1,
+                        min: -2, //hard for phone users to get 0 scale
                         stepSize: 1
                     }
                 }
             }
         }
 
-        var ctx = this.document.getElementById('chartJSContainer').getContext('2d');
-        var spiderChart = new Chart(ctx, options);
+        var context = this.document.getElementById('chartJSContainer').getContext('2d');
+        var spiderChart = new Chart(context, options);
         window.test = spiderChart;
-        var url_base64 = document.getElementById('chartJSContainer').toDataURL('image/jpg');
-        saveImage.href = url_base64;
     </script>
 </body>
 
