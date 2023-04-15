@@ -12,23 +12,21 @@
 </head>
 
 <body>
-    <div id="content" style="text-align: center;">
-        <h1>Title</h1>
-        <p>Instructions</p>
-    </div>
-    <canvas id="chartJSContainer" style="height: 90%; width: 90%;"></canvas>
+    <a id='saveImage' download='spider_chart_report.jpg'>Save as Image</a>
+    <canvas id="chartJSContainer" style="height: 90%; width: 100%;"></canvas>
     <script>
         const anchors = ["Adaptiveness","Absorption/Immersion","Emotional Involvement","Dissociation","Embodiment","Perspective",
         "Complexity/Elaborateness","Flexibility/Transformative Ability", "Vivideness", "Suggestibility","Willingness",
         "Resistance", "Temporal Tendency", "Future", "Past", "Fantasy Orientation", "Novelty", "Possibility", "Practicality"]
+        const initialDegree = Array(anchors.length).fill(10)
         var options = {
             type: 'radar',
             data: {
                 labels: anchors,
                 datasets: [{
-                    label: 'Degree',
-                    data: [10]*anchors.length,
-                    pointHitRadius: 50
+                    label: 'Scale',
+                    data: initialDegree,
+                    pointHitRadius: 50,
                 }]
             },
             options: {
@@ -43,22 +41,19 @@
                         round: 1,
                         showTooltip: true,
                         onDragStart: function (e) {
-                            // console.log(e)
                         },
                         onDrag: function (e, datasetIndex, index, value) {
                             e.target.style.cursor = 'grabbing'
-                            // console.log(e, datasetIndex, index, value)
                         },
                         onDragEnd: function (e, datasetIndex, index, value) {
                             e.target.style.cursor = 'default'
-                            // console.log(datasetIndex, index, value)
                         },
                     }
                 },
                 scales: {
                     r: {
                         max: 10,
-                        min: 0,
+                        min: -0.1,
                         stepSize: 1
                     }
                 }
@@ -66,7 +61,10 @@
         }
 
         var ctx = this.document.getElementById('chartJSContainer').getContext('2d');
-        window.test = new Chart(ctx, options);
+        var spiderChart = new Chart(ctx, options);
+        window.test = spiderChart;
+        var url_base64 = document.getElementById('chartJSContainer').toDataURL('image/jpg');
+        saveImage.href = url_base64;
     </script>
 </body>
 
