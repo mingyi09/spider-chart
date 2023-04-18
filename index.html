@@ -34,7 +34,8 @@
                 datasets: [{
                     label: 'Scale',
                     data: initialDegree,
-                    pointHitRadius: 50,
+                    pointHitRadius: 10,
+                    //coloring
                     backgroundColor: 'rgb(238,225,255,0.5)',
                     borderColor: '#c2aeff',
                     pointBackgroundColor: '#b892ff',
@@ -53,7 +54,7 @@
                 },
                 plugins: {
                     dragData: {
-                        round: 1,
+                        round: 0,
                         showTooltip: true,
                         onDragStart: function (e) {
                         },
@@ -68,10 +69,10 @@
                 scales: {
                     r: {
                         max: 10,
-                        min: -2, //hard for phone users to get 0 scale
-                        stepSize: 1
+                        min: 0,
+                        stepSize: 2,
                     }
-                }
+                },
             }
         }
 
