@@ -13,14 +13,17 @@
 </head>
 
 <body>
-    <a id='saveImage' download="spider chart">
-        <img alt="downloadable icon" src="icon/download_button.png" width="40" height="40">
+    <div>
+        <p>Use the following radar chart as an example to make and save your own chart!</p>
+        <img alt="example chart" src="icon/enneadecagon.png" width="53%" height="53%">
+    </div>
+    <a id='saveImage' download="spider chart" >
+        <img alt="downloadable icon" src="icon/download_button.png" width="3%" height="3%">
     </a>
-    
     <canvas id="chartJSContainer" style="height: 90%; width: 100%;"></canvas>
     <script>
         const anchors = ["Adaptiveness","Absorption/Immersion","Emotional Involvement","Dissociation","Embodiment","Perspective",
-        "Complexity/Elaborateness","Flexibility/Transformative Ability", "Vivideness", "Suggestibility","Willingness",
+        "Complexity/Elaborateness","Flexibility/Transformative Ability", "Vividness", "Suggestibility","Willingness",
         "Resistance", "Temporal Tendency", "Future", "Past", "Fantasy Orientation", "Novelty", "Possibility", "Practicality"]
         const initialDegree = Array(anchors.length).fill(10)
         function done(){
@@ -34,7 +37,6 @@
                 datasets: [{
                     label: 'Scale',
                     data: initialDegree,
-                    pointHitRadius: 10,
                     //coloring
                     backgroundColor: 'rgb(238,225,255,0.5)',
                     borderColor: '#c2aeff',
@@ -69,8 +71,8 @@
                 scales: {
                     r: {
                         max: 10,
-                        min: 0,
-                        stepSize: 2,
+                        min: -1,
+                        stepSize: 1,
                     }
                 },
             }
