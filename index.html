@@ -13,14 +13,17 @@
 </head>
 
 <body>
-    <div>
+    <!-- <div>
         <p>Use the following spider chart as an example to make and save your own chart!</p>
         <img alt="example chart" src="icon/enneadecagon.png" width="53%" height="53%">
+    </div> -->
+    
+    <div id="canvasContainer">
+        <a id='saveImage' download="spider chart" >
+            <img alt="downloadable icon" src="icon/download_button.png" width="5%" height="5%">
+        </a>
+        <canvas id="chartJSContainer" style="height: 90%; width: 60%;"></canvas>
     </div>
-    <a id='saveImage' download="spider chart" >
-        <img alt="downloadable icon" src="icon/download_button.png" width="3%" height="3%">
-    </a>
-    <canvas id="chartJSContainer" style="height: 90%; width: 100%;"></canvas>
     <script>
         const anchors = ["Adaptiveness","Absorption/Immersion","Emotional Involvement","Dissociation","Embodiment","Perspective",
         "Complexity/Elaborateness","Flexibility/Transformative Ability", "Vividness", "Suggestibility","Willingness",
@@ -46,6 +49,14 @@
                 }]
             },
             options: {
+                layout: {
+                    padding: {
+                        top: 20,
+                        right: 20,
+                        bottom: 20,
+                        left: 20
+                    }
+                },
                 animation: {onComplete: done},
                 responsive: false,
                 onHover: function (e) {
